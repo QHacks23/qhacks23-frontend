@@ -16,8 +16,17 @@ export const getAssetById = (id) => {
 };
 
 // Create asset
-export const createAsset = (asset) => {
-  return AxiosClient.post("/asset", asset);
+export const createAsset = (credit, mnemonic, cost, userId) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return AxiosClient.post(
+    "/credit/create",
+    { userId, credit, mnemonic, cost },
+    config
+  );
 };
 
 // List asset by user
@@ -31,13 +40,19 @@ export const updateAssetPrice = (id, price) => {
 };
 
 // Buy asset
-export const buyAsset = (id, asset) => {
+export const buyAsset = async (id, asset) => {
   return AxiosClient.put(`/asset/buy/${id}`, asset);
 };
 
 //Login User
 export const loginUser = (user) => {
-  return AxiosClient.post("/login", user);
+  const config = {
+    withCredentials: false,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  };
+  return AxiosClient.post("/login", user, config);
 };
 
 // Register User
