@@ -1,7 +1,7 @@
 import React from "react";
 import treeimage from '../assets/tree_image.png';
 import Auth from "./Auth";
-import Listingcard from "./Listingcard";
+import Listingcard from "./ProductPage";
 function Login() {
   return (
     <div style={styles.container}>
@@ -15,10 +15,6 @@ function Login() {
       </form> */}
       <div>
         <Auth style={{position: "absolute", left: "0", marginRight: "100", bottom: "0", width: "auto", height: "100%"}}/>
-      </div>
-
-      <div>
-        <Listingcard />
       </div>
 
       <div style={{position: "absolute", right: "0", marginLeft: "100", bottom: "0", width: "auto", height: "100%"}}>

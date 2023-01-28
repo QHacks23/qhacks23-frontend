@@ -5,6 +5,7 @@ import AssetView from "./components/AssetView";
 import Marketplace from "./components/Marketplace";
 import WebFont from "webfontloader";
 import Login from "./components/Login";
+import Profile from "./components/EditProfile"
 import { useEffect } from "react";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/asset" element={<AssetView />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>
