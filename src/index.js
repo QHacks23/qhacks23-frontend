@@ -1,16 +1,29 @@
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
 import Home from "./components/Home";
+import AssetView from "./components/AssetView";
+import Marketplace from "./components/Marketplace";
+import WebFont from "webfontloader";
 import Login from "./components/Login";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Montserrat", "Chilanka", "VT323"],
+      },
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="marketplace" element={<Marketplace />} />
+          <Route path="marketplace/asset" element={<AssetView />} />
         </Route>
       </Routes>
     </BrowserRouter>
