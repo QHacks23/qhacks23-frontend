@@ -1,15 +1,24 @@
 import React, { useState } from "react";
+import IPFS from "../client/IPFS";
+import { createAsset } from "../client/Requests";
+import auth from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function CreateAsset() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [carbonClass, setCarbonClass] = useState("");
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState("");
   const [size, setSize] = useState("");
   const [geoLoc, setGeoLoc] = useState("");
-  const [img, setImg] = useState("");
+  const [image, setImg] = useState("");
 
-  const onSubmit = (e) => {
+  function handleUpload(event) {
+    setImg(event.target.files[0]);
+  }
+
+  const onSubmit = async (e) => {
     console.log("submitting");
     e.preventDefault();
     if (
@@ -19,7 +28,7 @@ function CreateAsset() {
       cost == "" ||
       size == "" ||
       geoLoc == "" ||
-      img == ""
+      image == null
     ) {
       alert("Please fill out all fields");
       return;
@@ -32,13 +41,15 @@ function CreateAsset() {
       cost,
       size,
       geoLoc,
-      img,
+      image,
     };
+
+    navigate("/EnterMnemonic", { state: newAsset });
   };
 
   return (
     <div style={styles.container}>
-      <form style={styles.inputContainer}>
+      <form style={styles.inputContainer} onSubmit={onSubmit}>
         <h1 style={styles.mainHeader}>Create Asset</h1>
         <h2 style={styles.singleHeader}>Asset Name</h2>
         <input
@@ -89,11 +100,9 @@ function CreateAsset() {
           }}
         />
         <h2 style={styles.singleHeader}>Upload Image</h2>
-        <div className="file-uploader">
-          <input type="file" onChange={() => {}} />
-        </div>
-        <button style={styles.submitButton} onClick={onSubmit}>
-          <h2 style={styles.singleHeader}>Create Asset</h2>
+        <input type="file" onChange={handleUpload} style={styles.singleInput} />
+        <button style={styles.submitButton} type="submit">
+          <h2 style={styles.singleHeader}>Next</h2>
         </button>
       </form>
     </div>

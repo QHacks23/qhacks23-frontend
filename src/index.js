@@ -6,6 +6,7 @@ import Marketplace from "./components/Marketplace";
 import WebFont from "webfontloader";
 import Login from "./components/Login";
 import CreateAsset from "./components/CreateAsset";
+import EnterMnemonic from "./components/EnterMnemonic";
 import { useEffect } from "react";
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/asset" element={<AssetView />} />
           <Route path="createAsset" element={<CreateAsset />} />
+          <Route path="enterMnemonic" element={<EnterMnemonic />} />
         </Route>
       </Routes>
     </BrowserRouter>
