@@ -1,9 +1,9 @@
 import React from "react";
 import treeimage from "../assets/tree_image.png";
 import Auth from "./Auth";
-import Listingcard from "./Listingcard";
 import { loginUser } from "../client/Requests";
 
+import Listingcard from "./ProductPage";
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -33,9 +33,7 @@ function Login() {
           }}
         />
       </div>
-      <div>
-        <Listingcard />
-      </div>
+
       <div
         style={{
           position: "absolute",
