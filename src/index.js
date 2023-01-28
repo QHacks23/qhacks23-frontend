@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import AssetView from "./components/AssetView";
 import Marketplace from "./components/Marketplace";
 import WebFont from "webfontloader";
+import Login from "./components/Login";
 import { useEffect } from "react";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/asset" element={<AssetView />} />
         </Route>
