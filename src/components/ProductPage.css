@@ -1,0 +1,92 @@
+/* CSS */
+.product-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-image {
+  flex: 1;
+}
+
+.product-image img {
+  width: 100%;
+}
+
+.product-info {
+  flex: 1;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 50px;
+}
+
+.product-description {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.product-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 10px;
+  color: rgb(72, 72, 72);
+}
+
+.product-artist {
+  font-size: 1.2rem;
+}
+
+.buy-button {
+  padding: 10px 60px;
+  background-color: #397e12;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.buy-near-button{
+  padding: 5px 60px;
+  background-color: #1b4303;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  margin: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.back-button{
+  padding: 5px 30px;
+  background-color: #1b4303;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  margin: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background-color: #65ce63;
+}
+
+.back-button:hover {
+  background-color: #919191;
+}
