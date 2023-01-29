@@ -52,8 +52,8 @@ function Profile() {
       const userOrders = await getOrders(auth.currentUser.uid)
       setUser(userDetails)
       // setAssets(userAssets)
-      setBuyRequests(userOrders.buyOrders.tokenIds)
-      setTransactions(userOrders.sellOpportunities.tokenIds)
+      setBuyRequests(userOrders.data.buyOrders.tokenIds)
+      setTransactions(userOrders.data.sellOpportunities.tokenIds)
     }
     fetchData()
   },[]);

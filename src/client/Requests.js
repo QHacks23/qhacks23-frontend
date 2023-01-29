@@ -49,8 +49,14 @@ export const updateAssetPrice = (id, price) => {
 };
 
 // Buy asset
-export const buyAsset = async (id, asset) => {
-  return AxiosClient.put(`/asset/buy/${id}`, asset);
+export const buyAsset = async (userId, tokenId, mnemonic ) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return AxiosClient.post(`/credit/buyorder`, { userId, tokenId, mnemonic },
+      config);
 };
 
 export const getUser = (id) => {

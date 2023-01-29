@@ -16,6 +16,7 @@ function GalleryIcon(props) {
     description: props.description,
     cost: props.cost,
     geoLoc: props.geoLoc,
+    tokenId: props.tokenId
   };
 
   const navigate = useNavigate();

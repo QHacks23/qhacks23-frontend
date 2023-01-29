@@ -94,6 +94,7 @@ function Marketplace() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                tokenId={item.token}
               />
             );
           })}
