@@ -1,15 +1,10 @@
-import React from 'react';
-import './ProductPage.css';
-import QuantityButton from './QuantityButton';
-
-
-
-
+import React from "react";
+import "./ProductPage.css";
+import QuantityButton from "./QuantityButton";
 
 function ProductPage({ nft }) {
   return (
     <div className="product-page">
-     
       <div className="product-image">
         <img src={nft.imageUrl} alt={nft.name} />
       </div>
@@ -21,11 +16,6 @@ function ProductPage({ nft }) {
         </div>
         <p className="Product-description">{nft.location}</p>
         <button className="buy-button">Buy</button>
-        <QuantityButton />
-        <button className="back-button">
-          Go Back
-          </button>
-
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import IPFS from "../client/IPFS";
+// import IPFS from "../client/IPFS";
 import { createAsset } from "../client/Requests";
 import auth from "../firebase";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function EnterMnemonic() {
   const navigate = useNavigate();
@@ -11,22 +12,112 @@ function EnterMnemonic() {
   const newAsset = location.state;
   const [mnemonic, setMnemonic] = useState("");
   const [error, setError] = useState(false);
+
   const onSubmit = async (e) => {
     console.log("submitting");
     e.preventDefault();
-    const ipfs = await IPFS(newAsset);
+
+    const formData = new FormData();
+    formData.append("file", newAsset.image);
+    formData.append(
+      "pinataMetadata",
+      JSON.stringify({
+        name: newAsset.name,
+        carbonClass: newAsset.carbonClass,
+        description: newAsset.description,
+        cost: newAsset.cost,
+        size: newAsset.size,
+        geoLoc: newAsset.geoLoc,
+      })
+    );
+    formData.append("pinataOptions", JSON.stringify({ cidVersion: 0 }));
+
+    const resFile = await axios({
+      method: "post",
+      url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+      data: formData,
+      maxBodyLength: "Infinity",
+      headers: {
+        pinata_api_key: "26ea08629b6b4dbe6f47",
+        pinata_secret_api_key:
+          "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
+        "Content-Type": "multipart/form-data; boundary=${formData._boundary}",
+      },
+    });
+
+    const ImgHash = resFile.data.IpfsHash;
+    console.log(ImgHash);
+
+    // const updates = JSON.stringify({
+    //   ipfsPinHash: ImgHash,
+    //   name: newAsset.name,
+    //   keyvalues: {
+    //     carbonClass: newAsset.carbonClass,
+    //     description: newAsset.description,
+    //     cost: newAsset.cost,
+    //     size: newAsset.size,
+    //     geoLoc: newAsset.geoLoc,
+    //   },
+    // });
+
+    // const updateRes = await axios({
+    //   method: "put",
+    //   url: "https://api.pinata.cloud/pinning/hashMetadata",
+    //   headers: {
+    //     pinata_api_key: "26ea08629b6b4dbe6f47",
+    //     pinata_secret_api_key:
+    //       "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
+    //     "Content-Type": "application/json",
+    //   },
+    //   data: updates,
+    // });
+
+    const data = JSON.stringify({
+      pinataMetadata: {
+        name: `JSON-${newAsset.name}`,
+      },
+      pinataOptions: {
+        cidVersion: 1,
+      },
+      pinataContent: {
+        carbonClass: newAsset.carbonClass,
+        description: newAsset.description,
+        cost: newAsset.cost,
+        size: newAsset.size,
+        geoLoc: newAsset.geoLoc,
+        img: ImgHash,
+      },
+    });
+
+    const jsonFile = await axios({
+      method: "post",
+      url: "https://api.pinata.cloud/pinning/pinJSONToIPFS",
+      data: data,
+      headers: {
+        pinata_api_key: "26ea08629b6b4dbe6f47",
+        pinata_secret_api_key:
+          "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(jsonFile.data.IpfsHash);
+
     const userId = auth.currentUser.uid;
+    console.log(userId);
+
+    console.log(newAsset.cost);
     const create = await createAsset(
-      ipfs.ipnft,
+      jsonFile.data.IpfsHash,
       mnemonic,
-      newAsset.cost,
+      parseInt(newAsset.cost),
       userId
     );
-    if (create.error) {
-      setError("Unable to create asset. Please try again later.");
+    console.log(create);
+    if (create) {
+      navigate("/Marketplace");
     } else {
-      setError("Asset created successfully!");
-      navigate("/marketplace");
+      setError("Incorrect Mnemonic");
     }
   };
 

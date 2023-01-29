@@ -3,8 +3,10 @@ import GalleryIcon from "./GalleryIcon";
 import bush from "../assets/bush.png";
 import Popup from "reactjs-popup";
 import AssetView from "./AssetView";
+import { useNavigate } from "react-router-dom";
 
 function Marketplace() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="container" style={styles.container}>
@@ -14,8 +16,25 @@ function Marketplace() {
             <h1>Marketplace</h1>
           </div>
         </div>
+        <div className="createButton" style={styles.createButton}>
+          <button
+            style={styles.button}
+            onClick={() => {
+              navigate("/createAsset");
+            }}
+          >
+            {" "}
+            Create Collection{" "}
+          </button>
+        </div>
         <h2
-          style={{ fontFamily: "Montserrat", fontSize: 30, margin: "0 10vw" }}
+          style={{
+            fontFamily: "Montserrat",
+            fontSize: 30,
+            margin: "0 2vw",
+            marginTop: "2vh",
+            marginBottom: "-2vh",
+          }}
         >
           Explore
         </h2>
@@ -23,7 +42,7 @@ function Marketplace() {
           style={{
             color: "rgba(0, 0, 0, 0.7)",
             marginTop: "2rem",
-            width: "77%",
+            width: "100%",
           }}
         />
         <div className="content" style={styles.content}>
@@ -51,6 +70,26 @@ function Marketplace() {
             image="https://picsum.photos/200/300"
             name="Collection 6"
           />
+          <GalleryIcon
+            image="https://picsum.photos/200/300"
+            name="Collection 6"
+          />
+          <GalleryIcon
+            image="https://picsum.photos/200/300"
+            name="Collection 6"
+          />
+          <GalleryIcon
+            image="https://picsum.photos/200/300"
+            name="Collection 6"
+          />
+          <GalleryIcon
+            image="https://picsum.photos/200/300"
+            name="Collection 6"
+          />
+          <GalleryIcon
+            image="https://picsum.photos/200/300"
+            name="Collection 6"
+          />
         </div>
       </div>
     </div>
@@ -64,7 +103,7 @@ const styles = {
     fontFamily: "Montserrat",
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    // height: "100vh",
     color: "black",
     fontSize: "calc(10px + 2vmin)",
     padding: "0 5vw",
@@ -75,7 +114,7 @@ const styles = {
     flexDirection: "column",
     fontSize: "calc(20px + 2vmin)",
     color: "black",
-    margin: "0 7vw",
+    marginTop: "3vh",
   },
   title: {
     display: "flex",
@@ -91,5 +130,31 @@ const styles = {
     color: "black",
     flexWrap: "wrap",
     justifyContent: "center",
+  },
+  createButton: {
+    display: "flex",
+    flexDirection: "row",
+    fontSize: "calc(10px + 3vmin)",
+    color: "black",
+    justifyContent: "flex-end",
+    marginTop: "2vh",
+  },
+  button: {
+    backgroundColor: "#4CAF50",
+    border: "none",
+    color: "white",
+    padding: "15px 32px",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "inline-block",
+    fontSize: "16px",
+    margin: "4px 2px",
+    cursor: "pointer",
+    borderRadius: "12px",
+    position: "absolute",
+    right: "8vw",
+    top: "5vh",
+    fontFamily: "VT323",
+    fontSize: "calc(5px + 2vmin)",
   },
 };
