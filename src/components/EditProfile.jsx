@@ -39,12 +39,51 @@ function Profile() {
 
   const getUserDetails = async (userId) => {
     const userQuery = await getUser(userId)
+
     return userQuery.data
   }
 
   const getOrders = async (userId) => {
     const orders = await getAssetOrders(userId)
     return orders
+  }
+
+  const getSellTransactions= async (orders) => {
+    for (const asset of orders.data.sellOpportunities.tokenIds) {
+      try {
+        const assetQuery = await fetch(
+            // `https://gateway.pinata.cloud/ipfs/${asset.body}`
+            `http://192.168.2.20:8080/${asset.body}`
+        );
+        const assetData = await assetQuery.json();
+        asset.body = assetData;
+        // asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        asset.body.image = `http://192.168.2.20:8080/${asset.body.img}`
+        setTransactions((assets) => [...assets, asset]);
+      } catch (err) {
+        setTransactions((assets) => [...assets, asset]);
+        console.log(err);
+      }
+    }
+  }
+
+  const getBuyRequests= async (orders) => {
+    for (const asset of orders.data.buyOrders.tokenIds) {
+      try {
+        const assetQuery = await fetch(
+            // `https://gateway.pinata.cloud/ipfs/${asset.body}`
+            `http://192.168.2.20:8080/${asset.body}`
+        );
+        const assetData = await assetQuery.json();
+        asset.body = assetData;
+        // asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        asset.body.image = `http://192.168.2.20:8080/${asset.body.img}`
+        setBuyRequests((assets) => [...assets, asset]);
+      } catch (err) {
+        setBuyRequests((assets) => [...assets, asset]);
+        console.log(err);
+      }
+    }
   }
 
   useEffect(() => {
@@ -55,8 +94,10 @@ function Profile() {
       const userOrders = await getOrders(auth.currentUser.uid)
       setUser(userDetails)
       // setAssets(userAssets)
-      setBuyRequests(userOrders.buyOrders.tokenIds)
-      setTransactions(userOrders.sellOpportunities.tokenIds)
+      console.log(userOrders.data)
+      const buyReq = await getBuyRequests(userOrders)
+      const transactions = await getSellTransactions(userOrders)
+      console.log(buyRequests)
     }
     fetchData()
   },[]);
