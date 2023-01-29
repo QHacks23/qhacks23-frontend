@@ -9,6 +9,7 @@ import CreateAsset from "./components/CreateAsset";
 import EnterMnemonic from "./components/EnterMnemonic";
 import Profile from "./components/EditProfile";
 import { useEffect } from "react";
+import ShowMnemonic from "./components/ShowMnemonic";
 
 export default function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="createAsset" element={<CreateAsset />} />
           <Route path="enterMnemonic" element={<EnterMnemonic />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="mnemonic" element={<ShowMnemonic/>} />
         </Route>
       </Routes>
     </BrowserRouter>
