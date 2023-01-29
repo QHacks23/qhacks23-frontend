@@ -41,8 +41,8 @@ export default function (props) {
         };
         console.log(userObj);
         const request = await registerUser(userObj);
-        console.log(request);
-        navigate("/profile");
+        console.log(request.data);
+        navigate("/mnemonic", { state: request.data.mnemonic });
       })
       .catch((error) => {
         console.log(error);
