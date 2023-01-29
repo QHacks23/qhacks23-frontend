@@ -95,6 +95,7 @@ function Marketplace() {
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
                 tokenId={item.token}
+                viewType={'marketplace'}
               />
             );
           })}

@@ -9,7 +9,6 @@ import { useLocation } from "react-router-dom";
 function GalleryIcon(props) {
   const location = useLocation();
   const [hover, setHover] = useState(false);
-
   const asset = {
     name: props.name,
     image: props.image,
@@ -25,8 +24,8 @@ function GalleryIcon(props) {
       className="gallery-icon"
       style={styles.galleryIcon}
       onClick={() => {
-        // console.log(asset);
-        navigate("/marketplace/asset", { state: asset });
+        console.log(`/${props.viewType}/asset`);
+        navigate(`/${props.viewType}/asset`, { state: asset });
       }}
     >
       <img
