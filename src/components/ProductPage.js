@@ -4,6 +4,10 @@ import QuantityButton from "./QuantityButton";
 import tree_view from "../assets/tree_view.png";
 
 function ProductPage({ nft }) {
+  // const buyAsset = () => {
+  //   console.log("buying asset");
+  // };
+
   return (
     <div className="product-page">
       <div className="product-image">

@@ -176,7 +176,7 @@ const styles = {
     flexDirection: "column",
     fontSize: "calc(20px + 2vmin)",
     color: "black",
-    margin: "0 7vw",
+    margin: "0 0vw",
   },
   title: {
     display: "flex",

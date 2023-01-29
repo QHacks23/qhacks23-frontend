@@ -12,7 +12,9 @@ export const getAssets = async () => {
 
 export const getUserAssets = async (id) => {
   try {
-    const response = await AxiosClient.get("/credit/user", { params: { id: id } });
+    const response = await AxiosClient.get("/credit/user", {
+      params: { id: id },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,17 +51,17 @@ export const updateAssetPrice = (id, price) => {
 };
 
 // Buy asset
-export const buyAsset = async (id, asset) => {
-  return AxiosClient.put(`/asset/buy/${id}`, asset);
+export const buyAsset = async (userId, tokenId, mnemonic) => {
+  return AxiosClient.put(`/credit/buyorder`, { userId, tokenId, mnemonic });
 };
 
 export const getUser = (id) => {
-  return AxiosClient.get('/user', { params: { id: id } });
-}
+  return AxiosClient.get("/user", { params: { id: id } });
+};
 
 export const getAssetOrders = (id) => {
-  return AxiosClient.get('/credit/orders', { params: { id: id } });
-}
+  return AxiosClient.get("/credit/orders", { params: { id: id } });
+};
 
 //Login User
 export const loginUser = (user) => {
