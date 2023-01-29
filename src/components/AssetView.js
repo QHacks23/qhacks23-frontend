@@ -2,37 +2,21 @@ import React from "react";
 import ProductPage from "./ProductPage";
 import Listingcard from "./ProductPage";
 import tree_view from "../assets/tree_view.png";
+import { useLocation } from "react-router-dom";
 
-const testNFT = {
-  imageUrl: tree_view,
-  name: "Forest Lot #1",
-  description: "This is a lot in the Alberta Dolan Forest",
-  price: "100",
-  location: "Alberta, CA",
-};
+// const testNFT = {
+//   imageUrl: tree_view,
+//   name: "Forest Lot #1",
+//   description: "This is a lot in the Alberta Dolan Forest",
+//   price: "100",
+//   location: "Alberta, CA",
+// };
 
 function AssetView() {
-  const [nft, setNft] = React.useState({});
+  const location = useLocation();
+  const asset = location.state;
 
-  const getDataFromCID = async (cid) => {
-    const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-    setNft(data);
-  };
-
-  React.useEffect(() => {
-    // const cid = window.location.pathname.split("/")[2];
-    const cid = "bafyreihpdg4nkdsb7vvaft7oqiixg2n5y45d3ufjlhxcvgk5dan4l3odya";
-    getDataFromCID(cid);
-  }, []);
-
-  return (
-    <div style={styles.container}>
-      <ProductPage nft={testNFT} />
-    </div>
-  );
+  return <div style={styles.container}>{<ProductPage nft={asset} />}</div>;
 }
 
 export default AssetView;

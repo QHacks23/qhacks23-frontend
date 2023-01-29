@@ -80,6 +80,7 @@ function EnterMnemonic() {
         cidVersion: 1,
       },
       pinataContent: {
+        name: newAsset.name,
         carbonClass: newAsset.carbonClass,
         description: newAsset.description,
         cost: newAsset.cost,

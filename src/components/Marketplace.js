@@ -1,23 +1,47 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import GalleryIcon from "./GalleryIcon";
 import bush from "../assets/bush.png";
 import Popup from "reactjs-popup";
 import AssetView from "./AssetView";
 import { useNavigate } from "react-router-dom";
-import {getAssets} from "../client/Requests";
+import { getAssets } from "../client/Requests";
 
 function Marketplace() {
   const navigate = useNavigate();
-  const [listings, setListings] = useState([])
+  const [listings, setListings] = useState([]);
+  const [assets, setAssets] = useState([]);
 
   const getAllListings = async () => {
-    const rslt = await getAssets()
-    setListings(rslt.nft)
-  }
+    const rslt = await getAssets();
+    for (const asset of rslt.nft) {
+      if (asset.body.length < 10) {
+        continue;
+      }
+      console.log("Made it");
+      try {
+        const assetQuery = await fetch(
+          `https://gateway.pinata.cloud/ipfs/${asset.body}`
+        );
+        const assetData = await assetQuery.json();
+        asset.body = assetData;
+        asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        console.log(asset);
+        setAssets((assets) => [...assets, asset]);
+      } catch (err) {
+        setAssets((assets) => [...assets, asset]);
+        console.log(err);
+      }
+    }
+    console.log(rslt.nft);
+    setListings(rslt.nft);
+  };
 
   useEffect(() => {
-    getAllListings().then(() => { console.log("good")})
-  });
+    async function fetchData() {
+      await getAllListings();
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -32,11 +56,10 @@ function Marketplace() {
           <button
             style={styles.button}
             onClick={() => {
-              navigate("/createAsset");
+              navigate("/profile");
             }}
           >
-            {" "}
-            Create Collection{" "}
+            Profile
           </button>
         </div>
         <h2
@@ -58,7 +81,22 @@ function Marketplace() {
           }}
         />
         <div className="content" style={styles.content}>
-          {listings.map((item) => {return <GalleryIcon image="https://picsum.photos/200/300" name={item.token}/>})}
+          {assets.map((item) => {
+            return (
+              <GalleryIcon
+                image={
+                  item.body.image
+                    ? item.body.image
+                    : "https://picsum.photos/200/300"
+                }
+                name={item.body.name ? item.body.name : item.token}
+                description={item.body.description}
+                cost={item.body.cost}
+                geoLoc={item.body.geoLoc}
+                size={item.body.size}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
