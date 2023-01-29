@@ -42,7 +42,7 @@ export default function (props) {
         console.log(userObj);
         const request = await registerUser(userObj);
         console.log(request);
-        navigate("/marketplace");
+        navigate("/profile");
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +58,7 @@ export default function (props) {
         // const user = userCredential.user;
         // const request = loginUser({ email, password });
         // console.log(request);
-        navigate("/marketplace");
+        navigate("/profile");
       })
       .catch((error) => {
         console.log(error);
