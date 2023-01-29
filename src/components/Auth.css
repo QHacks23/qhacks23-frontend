@@ -2,6 +2,54 @@
     background-color: white;
 }
 
+.modal {
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 1rem;
+    min-height: 50vh;
+    color: black;
+    font-size: calc(10px + 2vmin);
+    padding: 5vh 5vw;
+    display: flex;
+    align-items: center;
+    width: 75%;
+}
+
+.modal > .header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+}
+
+.modal > .content {
+    width: 400%;
+    height: 400%;
+    padding: 10px 5px;
+}
+
+.modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+}
+
+.modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+}
+
 .Auth-form-container {
     display: flex;
     justify-content: left;
@@ -10,33 +58,32 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-  }
-  
-  .Auth-form {
+}
+
+.Auth-form {
     width: 420px;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: white;
-  }
-  
-  .Auth-form-content {
+}
+
+.Auth-form-content {
     padding-left: 12%;
     padding-right: 12%;
-  }
-  
-  .Auth-form-title {
+}
+
+.Auth-form-title {
     text-align: center;
     margin-bottom: 1em;
     font-size: 24px;
     color: rgb(34, 34, 34);
     font-weight: 800;
-  }
-  
-  label {
+}
+
+label {
     font-size: 14px;
     font-weight: 600;
     color: rgb(34, 34, 34);
-  }
-  
+}
