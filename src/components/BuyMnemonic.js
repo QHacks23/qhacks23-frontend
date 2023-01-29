@@ -24,7 +24,7 @@ function BuyMnemonic() {
         const create = await buyAsset(userId, asset.tokenId, mnemonic);
         console.log(create);
         if (create) {
-            navigate("/Marketplace");
+            navigate("/profile");
         } else {
             setError("Incorrect Mnemonic");
         }

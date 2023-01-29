@@ -16,10 +16,10 @@ function ProductPage({ nft, type }) {
   };
   const initSellAsset = async (e) => {
     e.preventDefault();
-    const buyJson = {
+    const sellJson = {
       tokenId: nft.tokenId,
     };
-    navigate("/buyMnemonic", { state: buyJson });
+    navigate("/purchaseMnemonic", { state: sellJson });
   };
 
   return (

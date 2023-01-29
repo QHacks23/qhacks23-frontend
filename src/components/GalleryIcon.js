@@ -24,8 +24,8 @@ function GalleryIcon(props) {
       className="gallery-icon"
       style={styles.galleryIcon}
       onClick={() => {
-        console.log(`/${props.viewType}/asset`);
-        navigate(`/${props.viewType}/asset`, { state: asset });
+        console.log(`/${props.baseDir}/${props.viewType}`);
+        navigate(`/${props.baseDir}/${props.viewType}`, { state: asset });
       }}
     >
       <img

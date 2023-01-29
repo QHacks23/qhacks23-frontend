@@ -154,7 +154,9 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
-                viewType={'profile'}
+                tokenId={item.tokenId}
+                baseDir={'profile'}
+                viewType={'asset'}
               />})}
             </div>
             <div label="My Buy Requests">
@@ -170,6 +172,8 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                tokenId={item.token}
+                baseDir={'profile'}
                 viewType={'buy'}
               />})}
             </div>
@@ -186,6 +190,8 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                tokenId={item.token}
+                baseDir={'profile'}
                 viewType={'sell'}
               />})}
             </div>

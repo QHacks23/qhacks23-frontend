@@ -31,8 +31,8 @@ export default function App() {
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="marketplace/asset" element={<AssetView type={'marketplace'} />} />
           <Route path="profile/asset" element={<AssetView type={'profile'}/>} />
-          <Route path="buy/asset" element={<AssetView type={'buy'}/>} />
-          <Route path="sell/asset" element={<AssetView type={'sell'}/>} />
+          <Route path="profile/buy" element={<AssetView type={'buy'}/>} />
+          <Route path="profile/sell" element={<AssetView type={'sell'}/>} />
           <Route path="createAsset" element={<CreateAsset />} />
           <Route path="enterMnemonic" element={<EnterMnemonic />} />
           <Route path="profile" element={<Profile />} />
