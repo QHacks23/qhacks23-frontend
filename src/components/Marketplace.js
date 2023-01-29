@@ -1,12 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import GalleryIcon from "./GalleryIcon";
 import bush from "../assets/bush.png";
 import Popup from "reactjs-popup";
 import AssetView from "./AssetView";
 import { useNavigate } from "react-router-dom";
+import {getAssets} from "../client/Requests";
 
 function Marketplace() {
   const navigate = useNavigate();
+  const [listings, setListings] = useState([])
+
+  const getAllListings = async () => {
+    const rslt = await getAssets()
+    setListings(rslt.nft)
+  }
+
+  useEffect(() => {
+    getAllListings().then(() => { console.log("good")})
+  });
+
   return (
     <div>
       <div className="container" style={styles.container}>
@@ -46,50 +58,7 @@ function Marketplace() {
           }}
         />
         <div className="content" style={styles.content}>
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 1"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 2"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 3"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 4"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 5"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
-          <GalleryIcon
-            image="https://picsum.photos/200/300"
-            name="Collection 6"
-          />
+          {listings.map((item) => {return <GalleryIcon image="https://picsum.photos/200/300" name={item.token}/>})}
         </div>
       </div>
     </div>

@@ -3,7 +3,16 @@ import AxiosClient from "./AxiosClient";
 // Get all assets
 export const getAssets = async () => {
   try {
-    const response = await AxiosClient.get("/assets");
+    const response = await AxiosClient.get("/credit/available");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getUserAssets = async (id) => {
+  try {
+    const response = await AxiosClient.get("/credit/user", { params: { id: id } });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -43,6 +52,14 @@ export const updateAssetPrice = (id, price) => {
 export const buyAsset = async (id, asset) => {
   return AxiosClient.put(`/asset/buy/${id}`, asset);
 };
+
+export const getUser = (id) => {
+  return AxiosClient.get('/user', { params: { id: id } });
+}
+
+export const getAssetOrders = (id) => {
+  return AxiosClient.get('/credit/orders', { params: { id: id } });
+}
 
 //Login User
 export const loginUser = (user) => {
