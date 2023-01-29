@@ -10,6 +10,7 @@ import EnterMnemonic from "./components/EnterMnemonic";
 import Profile from "./components/EditProfile";
 import { useEffect } from "react";
 import ShowMnemonic from "./components/ShowMnemonic";
+import PurchaseMnemonic from "./components/PurchaseMemonic";
 import BuyMnemonic from "./components/BuyMnemonic";
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="enterMnemonic" element={<EnterMnemonic />} />
           <Route path="profile" element={<Profile />} />
           <Route path="mnemonic" element={<ShowMnemonic />} />
+          <Route path="purchaseMnemonic" element={<PurchaseMnemonic />} />
           <Route path="buyMnemonic" element={<BuyMnemonic />} />
         </Route>
       </Routes>

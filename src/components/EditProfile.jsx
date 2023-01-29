@@ -21,12 +21,15 @@ function Profile() {
     for (const asset of rslt.nft) {
       try {
         const assetQuery = await fetch(
-          `https://gateway.pinata.cloud/ipfs/${asset.body}`
+          // `https://gateway.pinata.cloud/ipfs/${asset.body}`
+          `http://192.168.2.20:8080/${asset.body}`
         );
         const assetData = await assetQuery.json();
         asset.body = assetData;
-        asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        // asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        asset.body.image = `http://192.168.2.20:8080/${asset.body.img}`
         setAssets((assets) => [...assets, asset]);
+        console.log(asset)
       } catch (err) {
         setAssets((assets) => [...assets, asset]);
         console.log(err);
@@ -52,8 +55,8 @@ function Profile() {
       const userOrders = await getOrders(auth.currentUser.uid)
       setUser(userDetails)
       // setAssets(userAssets)
-      setBuyRequests(userOrders.data.buyOrders.tokenIds)
-      setTransactions(userOrders.data.sellOpportunities.tokenIds)
+      setBuyRequests(userOrders.buyOrders.tokenIds)
+      setTransactions(userOrders.sellOpportunities.tokenIds)
     }
     fetchData()
   },[]);
@@ -179,7 +182,7 @@ const styles = {
     flexDirection: "column",
     fontSize: "calc(20px + 2vmin)",
     color: "black",
-    margin: "0 7vw",
+    margin: "0 0vw",
   },
   title: {
     display: "flex",

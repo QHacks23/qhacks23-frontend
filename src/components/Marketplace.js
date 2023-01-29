@@ -20,11 +20,13 @@ function Marketplace() {
       console.log("Made it");
       try {
         const assetQuery = await fetch(
-          `https://gateway.pinata.cloud/ipfs/${asset.body}`
+          // `https://gateway.pinata.cloud/ipfs/${asset.body}`
+          `http://192.168.2.20:8080/${asset.body}`
         );
         const assetData = await assetQuery.json();
         asset.body = assetData;
-        asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        // asset.body.image = `https://gateway.pinata.cloud/ipfs/${asset.body.img}`;
+        asset.body.image = `http://192.168.2.20:8080/${asset.body.img}`;
         console.log(asset);
         setAssets((assets) => [...assets, asset]);
       } catch (err) {

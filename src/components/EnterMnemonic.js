@@ -19,28 +19,29 @@ function EnterMnemonic() {
 
     const formData = new FormData();
     formData.append("file", newAsset.image);
-    formData.append(
-      "pinataMetadata",
-      JSON.stringify({
-        name: newAsset.name,
-        carbonClass: newAsset.carbonClass,
-        description: newAsset.description,
-        cost: newAsset.cost,
-        size: newAsset.size,
-        geoLoc: newAsset.geoLoc,
-      })
-    );
-    formData.append("pinataOptions", JSON.stringify({ cidVersion: 0 }));
+    // formData.append(
+    //   "pinataMetadata",
+    //   JSON.stringify({
+    //     name: newAsset.name,
+    //     carbonClass: newAsset.carbonClass,
+    //     description: newAsset.description,
+    //     cost: newAsset.cost,
+    //     size: newAsset.size,
+    //     geoLoc: newAsset.geoLoc,
+    //   })
+    // );
+    // formData.append("pinataOptions", JSON.stringify({ cidVersion: 0 }));
 
     const resFile = await axios({
       method: "post",
-      url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+      // url: `${process.env.PINATA_BASE}/pinning/pinFileToIPFS`,
+      url: "http://192.168.2.20:8080/upload",
       data: formData,
       maxBodyLength: "Infinity",
       headers: {
-        pinata_api_key: "26ea08629b6b4dbe6f47",
-        pinata_secret_api_key:
-          "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
+        // pinata_api_key: "26ea08629b6b4dbe6f47",
+        // pinata_secret_api_key:
+        //   "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
         "Content-Type": "multipart/form-data; boundary=${formData._boundary}",
       },
     });
@@ -73,32 +74,37 @@ function EnterMnemonic() {
     // });
 
     const data = JSON.stringify({
-      pinataMetadata: {
-        name: `JSON-${newAsset.name}`,
-      },
-      pinataOptions: {
-        cidVersion: 1,
-      },
-      pinataContent: {
-        name: newAsset.name,
-        carbonClass: newAsset.carbonClass,
-        description: newAsset.description,
-        cost: newAsset.cost,
-        size: newAsset.size,
-        geoLoc: newAsset.geoLoc,
-        img: ImgHash,
-      },
+      // pinataMetadata: {
+      //   name: `JSON-${newAsset.name}`,
+      // },
+      // pinataOptions: {
+      //   cidVersion: 1,
+      // },
+      // pinataContent: {
+      name: newAsset.name,
+      carbonClass: newAsset.carbonClass,
+      description: newAsset.description,
+      cost: newAsset.cost,
+      size: newAsset.size,
+      geoLoc: newAsset.geoLoc,
+      img: ImgHash,
+      // },
     });
+
+    const formDataJson = new FormData();
+    formDataJson.append("text", data);
 
     const jsonFile = await axios({
       method: "post",
-      url: "https://api.pinata.cloud/pinning/pinJSONToIPFS",
-      data: data,
+      // url: `${process.env.PINATA_BASE}/pinning/pinJSONToIPFS`,
+      url: "http://192.168.2.20:8080/upload",
+      data: formDataJson,
       headers: {
-        pinata_api_key: "26ea08629b6b4dbe6f47",
-        pinata_secret_api_key:
-          "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
-        "Content-Type": "application/json",
+        // pinata_api_key: "26ea08629b6b4dbe6f47",
+        // pinata_secret_api_key:
+        //   "ee9b724e917d4927639bd4e6fcd33c54925464492ad95928f2cfb684905e6b16",
+        // "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data; boundary=${formData._boundary}",
       },
     });
 
