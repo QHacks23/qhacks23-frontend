@@ -12,11 +12,10 @@ import { useLocation } from "react-router-dom";
 //   location: "Alberta, CA",
 // };
 
-function AssetView() {
+function AssetView({type}) {
   const location = useLocation();
   const asset = location.state;
-
-  return <div style={styles.container}>{<ProductPage nft={asset} />}</div>;
+  return <div style={styles.container}>{<ProductPage nft={asset} type={type}/>}</div>;
 }
 
 export default AssetView;
