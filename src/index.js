@@ -31,7 +31,7 @@ export default function App() {
           <Route path="createAsset" element={<CreateAsset />} />
           <Route path="enterMnemonic" element={<EnterMnemonic />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="mnemonic" element={<ShowMnemonic/>} />
+          <Route path="mnemonic" element={<ShowMnemonic />} />
         </Route>
       </Routes>
     </BrowserRouter>

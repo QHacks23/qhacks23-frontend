@@ -4,30 +4,41 @@ import { useState } from "react";
 import Popup from "reactjs-popup";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function GalleryIcon(props) {
+  const location = useLocation();
   const [hover, setHover] = useState(false);
+
+  const asset = {
+    name: props.name,
+    image: props.image,
+    description: props.description,
+    cost: props.cost,
+    geoLoc: props.geoLoc,
+  };
+
   const navigate = useNavigate();
   return (
     <div
       className="gallery-icon"
       style={styles.galleryIcon}
       onClick={() => {
-        navigate("/marketplace/asset");
+        // console.log(asset);
+        navigate("/marketplace/asset", { state: asset });
       }}
     >
       <img
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        src={props.image}
-        alt={props.name}
+        src={props.image ? props.image : "https://via.placeholder.com/150"}
         style={{
           ...styles.image,
           ...(hover ? styles.imageHover : null),
         }}
       />
       <div className="name" style={styles.name}>
-        {props.name}
+        {props.name || "Name"}
       </div>
     </div>
   );
