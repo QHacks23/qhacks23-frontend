@@ -113,6 +113,7 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                viewType={'profile'}
               />})}
             </div>
             <div label="My Buy Requests">
@@ -128,6 +129,7 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                viewType={'buy'}
               />})}
             </div>
             <div label="Incoming Transactions">
@@ -143,6 +145,7 @@ function Profile() {
                 cost={item.body.cost}
                 geoLoc={item.body.geoLoc}
                 size={item.body.size}
+                viewType={'sell'}
               />})}
             </div>
           </Tabs>

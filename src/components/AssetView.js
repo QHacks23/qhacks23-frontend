@@ -4,11 +4,14 @@ import Listingcard from "./ProductPage";
 import tree_view from "../assets/tree_view.png";
 import { useLocation } from "react-router-dom";
 
-function AssetView() {
+function AssetView({ type }) {
   const location = useLocation();
   const asset = location.state;
-
-  return <div style={styles.container}>{<ProductPage nft={asset} />}</div>;
+  return (
+    <div style={styles.container}>
+      {<ProductPage nft={asset} type={type} />}
+    </div>
+  );
 }
 
 export default AssetView;
